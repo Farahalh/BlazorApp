@@ -3,13 +3,16 @@
 
 <h3>Todo</h3>
 
-@code {
-    private List<TodoItem> _todos = new();
 
-    <ul>
-        @foreach (var todo in todos)
+<ul>
+    @foreach (var todo in _todos)
     {
         <li>@todo.Title</li>
     }
-    </ul>
+</ul>
+
+@code {
+    private List<TodoItem> _todos = new();
+
+
 }
