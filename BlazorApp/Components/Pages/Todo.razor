@@ -1,16 +1,19 @@
 ﻿@page "/todo"
 @rendermode InteractiveServer
 
-<h3>Todo</h3>
+<h3>Todo (@_todos.Count(todo => !todo.IsDone))</h3>
 
 <ul>
     @foreach (var todo in _todos)
     {
-        <li>@todo.Title</li>
+        <li>
+            <input type="checkbox" @bind="todo.IsDone" />
+            <input @bind="todo.Title" />
+        </li>
     }
 </ul>
 
-<input @bind="_newTodo"/>
+<input @bind="_newTodo" />
 <button class="btn btn-primary" @onclick="AddTodo">Add todo</button>
 
 @code {
@@ -21,8 +24,8 @@
     {
         if (!string.IsNullOrWhiteSpace(_newTodo))
         {
-        _todos.Add(new TodoItem { Title = _newTodo });
-        _newTodo = string.Empty;
+            _todos.Add(new TodoItem { Title = _newTodo });
+            _newTodo = string.Empty;
         }
     }
 }
