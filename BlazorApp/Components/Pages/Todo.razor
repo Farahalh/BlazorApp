@@ -3,7 +3,6 @@
 
 <h3>Todo</h3>
 
-
 <ul>
     @foreach (var todo in _todos)
     {
@@ -11,8 +10,19 @@
     }
 </ul>
 
+<input @bind="_newTodo"/>
+<button class="btn btn-primary" @onclick="AddTodo">Add todo</button>
+
 @code {
     private List<TodoItem> _todos = new();
+    private string _newTodo = "";
 
-
+    void AddTodo()
+    {
+        if (!string.IsNullOrWhiteSpace(_newTodo))
+        {
+        _todos.Add(new TodoItem { Title = _newTodo });
+        _newTodo = string.Empty;
+        }
+    }
 }
